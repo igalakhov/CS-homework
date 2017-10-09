@@ -1,0 +1,36 @@
+/*
+ * Anagram Finder
+ * by Ivan Galakhov
+*/
+import java.io.*;
+
+public class anagramFinder {
+ public static void main(String[] args) throws IOException {
+   //the word whos anagram we are trying to find
+   String toFind = "horsecart"; //anagram of the word we are trying to find
+   String fileName = "words.txt"; //name of file with all the words (relative)
+   
+   File wordList = new File(fileName);
+   
+   String[] lines = getLines(wordList); //all the words in the test document in an array  
+   }
+ public static Byte[][] convertToNums(String[] words){
+   return null;
+ }
+ public static String[] getLines(File wordFile) throws IOException{
+   String[] out = {};
+  try {
+    Reader rd = new InputStreamReader(new FileInputStream(wordFile));
+    BufferedReader in = new BufferedReader(rd);
+    
+    String curLine;
+    
+    while ((curLine = in.readLine()) != null){
+      System.out.println(curLine);  
+    }
+  } catch (FileNotFoundException e){
+    System.out.println(e);
+  }
+  return out;
+ }
+}
