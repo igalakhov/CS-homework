@@ -10,7 +10,9 @@ public class anagramFinder {
  public static void main(String[] args) throws IOException {
    //the word whos anagram we are trying to find
    String fileName = "words.txt"; //name of file with all the words (relative)
-   long toFind = 1738749289310L; //prime representation of horsecart
+   ArrayList<String> originalWord = new ArrayList<String>();
+   originalWord.add(args[0]);
+   long toFind = multiplyChars(convertToNums(originalWord))[0]; //prime representation of whatever word we are trying to find
      
    File wordList = new File(fileName);
    
@@ -29,7 +31,6 @@ public class anagramFinder {
    for(int i = 0; i < found.size(); i++){
      System.out.println(lines.get(found.get(i)));
    }
-   
    }
  //converts all words into their ASCII values - 97
  public static long[] multiplyChars(ArrayList<ArrayList<Integer>> words){

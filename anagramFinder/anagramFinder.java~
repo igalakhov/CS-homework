@@ -10,16 +10,46 @@ public class anagramFinder {
  public static void main(String[] args) throws IOException {
    //the word whos anagram we are trying to find
    String fileName = "words.txt"; //name of file with all the words (relative)
-   
+   long toFind = 1738749289310L; //prime representation of horsecart
+     
    File wordList = new File(fileName);
    
    ArrayList<String> lines = getLines(wordList); //all the words in the test document in an arrayList
    ArrayList<ArrayList<Integer>> wordNums = convertToNums(lines);
    long[] encodedWords = multiplyChars(wordNums);
-   System.out.println(encodedWords[7]);
+   
+   ArrayList<Integer> found = new ArrayList<Integer>();
    for (int i = 0; i < encodedWords.length; i++){
-    System.out.println(encodedWords[i]);
+     if(encodedWords[i] == toFind){
+       found.add(i);
+     }
    }
+   //print out the results
+   System.out.println("Found Words:");
+   for(int i = 0; i < found.size(); i++){
+     System.out.println(lines.get(found.get(i)));
+   }
+   //find largest anagram family 
+   long[] tempEncoded = encodedWords.clone();
+   Arrays.sort(tempEncoded);
+   
+   int largestStreak = 0; 
+   int curStreak = 0;
+   long largestEncoded = 1;
+   for(int i = 1; i < tempEncoded.length; i++){
+     if(encodedWords[i] == tempEncoded[i - 1]){
+       curStreak++;
+     } else {
+       curStreak = 0;
+     }
+     if(curStreak > largestStreak){
+      largestStreak = curStreak; 
+      largestEncoded = encodedWords[i];
+     }
+     
+   }
+   System.out.println("Found " + (largestStreak + 1) + " words");
+   
    
    }
  //converts all words into their ASCII values - 97
@@ -43,7 +73,7 @@ public class anagramFinder {
      for(int j = 0; j < curWord.length(); j++){
       Character curChar = curWord.charAt(j);
       int curAscii = (int) curChar;
-      if(curAscii != 32){
+      if(curAscii >= 97 && curAscii <= 122){
         tempChars.add((curAscii - 97));
       }  
      }
